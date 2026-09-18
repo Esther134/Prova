@@ -55,15 +55,53 @@ document.addEventListener('DOMContentLoaded', () => {
 		realizadosEl.textContent = realizados;
 	}
 
+	let filterText = '';
+	let filterStatus = 'Todos';
+
+	function setupFilters() {
+		const search = document.getElementById('eventSearch');
+		const status = document.getElementById('eventStatusFilter');
+		if (search) {
+			search.addEventListener('input', (e) => {
+				filterText = String(e.target.value || '').toLowerCase();
+				renderEventos();
+			});
+		}
+		if (status) {
+			status.addEventListener('change', (e) => {
+				filterStatus = e.target.value || 'Todos';
+				renderEventos();
+			});
+		}
+	}
+
 	function renderEventos() {
-		const container = sections.Eventos;
+		const container = document.getElementById('eventList');
 		if (!container) return;
 		while (container.firstChild) container.removeChild(container.firstChild);
 
 		const row = document.createElement('div');
 		row.className = 'row';
 
-		eventos.forEach(ev => {
+		const filtered = eventos.filter(ev => {
+			const titleMatch = String(ev.titulo || '').toLowerCase().includes(filterText);
+			if (!titleMatch) return false;
+			if (filterStatus === 'Todos') return true;
+			const s = String(ev.status).toLowerCase();
+			if (filterStatus === 'Agendado') return s.includes('agend');
+			if (filterStatus === 'Realizado') return s.includes('realiz') || s.includes('confirm') || s.includes('conclu') || s.includes('feito');
+			return true;
+		});
+
+		if (filtered.length === 0) {
+			const empty = document.createElement('p');
+			empty.className = 'text-muted';
+			empty.textContent = 'Nenhum evento encontrado.';
+			container.appendChild(empty);
+			return;
+		}
+
+		filtered.forEach(ev => {
 			const col = document.createElement('div');
 			col.className = 'col-md-4';
 
@@ -220,6 +258,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// initialize Novo Evento form
 	setupNovoEvento();
+
+	// initialize filters for Eventos
+	setupFilters();
 
 	const initial = (location.hash && location.hash.length > 1) ? location.hash.slice(1) : 'Dashboard';
 	showView(initial);

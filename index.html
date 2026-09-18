@@ -94,7 +94,21 @@
         </div>
 
         <div class="container" id="Eventos">
-
+            <div id="eventFilters" class="mb-3">
+                <div class="row g-2">
+                    <div class="col-md-8">
+                        <input id="eventSearch" type="text" class="form-control" placeholder="Pesquisar por título...">
+                    </div>
+                    <div class="col-md-4">
+                        <select id="eventStatusFilter" class="form-select">
+                            <option value="Todos">Todos</option>
+                            <option value="Agendado">Agendado</option>
+                            <option value="Realizado">Realizado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="eventList"></div>
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
