@@ -17,7 +17,7 @@
                 <svg class="bi me-2" width="40" height="32" aria-hidden="true">
                     <use xlink:href="#bootstrap"></use>
                 </svg>
-                <span class="fs-4">Avaliação 01</span>
+                <span class="fs-4">Eventos</span>
             </a>
             <ul class="nav nav-pills">
                 <li class="nav-item">
@@ -31,11 +31,66 @@
     </div>
     <main id="app">
         <div class="container" id="Dashboard">
-            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Total de eventos</h5>
+                            <p class="card-text display-6" id="totalCount">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Eventos agendados</h5>
+                            <p class="card-text display-6" id="agendadosCount">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Eventos realizados</h5>
+                            <p class="card-text display-6" id="realizadosCount">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="container" id="NovoEvento">
-
+            <h2>Novo Evento</h2>
+            <form id="novoForm">
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">Título</label>
+                    <input type="text" class="form-control" id="titulo" required>
+                </div>
+                <div class="mb-3">
+                    <label for="tipo" class="form-label">Tipo</label>
+                    <select id="tipo" class="form-select" required>
+                        <option value="">Selecione...</option>
+                        <option>Palestra</option>
+                        <option>Workshop</option>
+                        <option>Minicurso</option>
+                        <option>Visita Técnica</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="data" class="form-label">Data</label>
+                    <input type="date" class="form-control" id="data" required>
+                </div>
+                <div class="mb-3">
+                    <label for="local" class="form-label">Local</label>
+                    <input type="text" class="form-control" id="local" required>
+                </div>
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição</label>
+                    <textarea id="descricao" class="form-control" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+            <div id="novoMessage" class="mt-3"></div>
         </div>
 
         <div class="container" id="Eventos">
